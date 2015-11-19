@@ -14,7 +14,6 @@ export default Ember.Component.extend({
   'url': '',
 
   generateRequest: Ember.observer('method', 'response-type', 'with-credentials', 'url', 'data', function() {
-    console.log('generateReqquest');
     this.request = new XRequest({
       freeze: false,
       responseType: this.get('response-type'),
@@ -29,7 +28,7 @@ export default Ember.Component.extend({
     this.set('model', this.request.state);
   }),
 
-  didInitAttrs() {
+  didInsertElement() {
     this.generateRequest();
   }
 });
