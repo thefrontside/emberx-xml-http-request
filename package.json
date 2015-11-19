@@ -27,22 +27,28 @@
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.3.1",
-    "ember-cli-qunit": "^1.0.4",
+    "ember-cli-mocha": "0.9.7",
     "ember-cli-release": "0.2.8",
     "ember-cli-sri": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "2.1.0",
+    "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-resolver": "^2.0.3",
-    "ember-disable-prototype-extensions": "^1.0.0",
-    "ember-try": "~0.0.8"
+    "ember-try": "~0.0.8",
+    "emberx-file-input": "^1.0.0"
   },
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.5"
+    "broccoli-babel-transpiler": "^5.5.0",
+    "broccoli-funnel": "^1.0.0",
+    "broccoli-merge-trees": "^1.0.0",
+    "ember-cli-babel": "^5.1.5",
+    "ember-cli-htmlbars": "^1.0.1",
+    "x-request": "^0.1.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

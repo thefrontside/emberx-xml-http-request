@@ -1,3 +1,13 @@
-<h2 id="title">Welcome to Ember</h2>
+{{#x-file-input multiple=true type="png" action=(action (mut files))}}
+  Click Me.
+{{/x-file-input}}
 
-{{outlet}}
+{{#each files as |file|}}
+  {{#x-xml-http-request method="POST" data=file url="http://posttestserver.com/post.php" as |xhr|}}
+    name: {{file.name}}<br/>
+    isLoadStarted: {{xhr.isLoadStarted}}<br/>
+    isLoadEnded: {{xhr.isLoadEnded}}<br/>
+    bytes: {{xhr.upload.loaded}}/{{xhr.upload.total}}<br/>
+    percent complete: {{xhr.upload.percentage}}%
+  {{/x-xml-http-request}}
+{{/each}}

@@ -1,0 +1,1 @@
+export { default } from 'emberx-xml-http-request/components/x-xml-http-request';
