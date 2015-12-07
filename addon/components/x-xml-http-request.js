@@ -12,8 +12,9 @@ export default Ember.Component.extend({
   'with-credentials': false,
   'timeout': 0,
   'url': '',
+  'headers': Ember.computed(function() { return {}; }),
 
-  generateRequest: Ember.observer('method', 'response-type', 'with-credentials', 'url', 'data', function() {
+  generateRequest: Ember.observer('method', 'response-type', 'with-credentials', 'url', 'data', 'headers', function() {
     this.request = new XRequest({
       freeze: false,
       responseType: this.get('response-type'),
@@ -24,6 +25,10 @@ export default Ember.Component.extend({
       })
     });
     this.request.open(this.get('method'), this.get('url'));
+    let headers = this.get('headers') || {};
+    Object.keys(headers).forEach((key)=> {
+      this.request.setRequestHeader(key, headers[key]);
+    });
     this.request.send(this.get('data'));
     this.set('model', this.request.state);
   }),
