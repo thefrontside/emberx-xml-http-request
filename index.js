@@ -4,6 +4,7 @@
 var BabelTranspiler = require('broccoli-babel-transpiler');
 var Funnel = require('broccoli-funnel');
 var MergeTrees = require('broccoli-merge-trees');
+var path = require('path');
 
 module.exports = {
   name: 'emberx-xml-http-request',
@@ -24,7 +25,10 @@ module.exports = {
     // transpile the x-request sources into ES5. However, we want
     // to leave the ES6 module declaration in place because they'll be
     // handled later by ember-cli.
-    var transpiled = new BabelTranspiler('node_modules/x-request/src', {
+
+    var src = path.join(require.resolve('x-request'), '../../src');
+
+    var transpiled = new BabelTranspiler(src, {
       loose: true,
       blacklist: ['es6.modules']
     });
