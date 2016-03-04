@@ -11,6 +11,6 @@
     "ember-mocha": "~0.8.6"
   },
   "resolutions": {
-    "ember": ">=1.4"
+    "ember": "2.2.0"
   }
 }
