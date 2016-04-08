@@ -14,26 +14,47 @@ export default Ember.Component.extend({
   'url': '',
   'headers': Ember.computed(function() { return {}; }),
 
-  generateRequest: Ember.observer('method', 'response-type', 'with-credentials', 'url', 'data', 'headers', function() {
-    this.request = new XRequest({
+  request: Ember.computed('method', 'response-type', 'with-credentials', 'url', 'headers', 'timeout', function() {
+    let request = new XRequest({
       freeze: false,
       responseType: this.get('response-type'),
       withCredentials: this.get('with-credentials'),
       timeout: this.get('timeout'),
       observe: Ember.run.bind(this, function(state) {
-        this.set('model', state);
+        this.set('currentState', state);
       })
     });
-    this.request.open(this.get('method'), this.get('url'));
     let headers = this.get('headers') || {};
     Object.keys(headers).forEach((key)=> {
-      this.request.setRequestHeader(key, headers[key]);
+      request.setRequestHeader(key, headers[key]);
     });
-    this.request.send(this.get('data'));
-    this.set('model', this.request.state);
+    return request;
   }),
 
-  didInsertElement() {
-    this.generateRequest();
+  setInitialState: Ember.observer('request', function() {
+    this.set('currentState', this.get('request.state'));
+  }),
+
+  model: Ember.computed('currentState', function() {
+    let request = this.get('request');
+    let config = this.getProperties('method', 'url');
+    return Object.create(this.get('currentState'), {
+      send: {
+        value: function(data) {
+          request.open(config.method, config.url);
+          request.send(data);
+        }
+      },
+      abort: {
+        value:  function() {
+          request.abort();
+        }
+      }
+    });
+  }),
+
+  didInsertElement(...args) {
+    this._super(...args);
+    this.setInitialState();
   }
 });
