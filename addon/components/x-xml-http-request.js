@@ -6,7 +6,6 @@ import XRequest from 'x-request/x-request';
 export default Ember.Component.extend({
   layout: layout,
 
-  'data': '',
   'method': 'POST',
   'response-type': 'json',
   'with-credentials': false,
@@ -14,14 +13,18 @@ export default Ember.Component.extend({
   'url': '',
   'headers': Ember.computed(function() { return {}; }),
 
+  'request-constructor': XRequest,
+
   request: Ember.computed('method', 'response-type', 'with-credentials', 'url', 'headers', 'timeout', function() {
-    let request = new XRequest({
+    let Request = this.get('request-constructor');
+
+    let request = new Request({
       freeze: false,
       responseType: this.get('response-type'),
       withCredentials: this.get('with-credentials'),
       timeout: this.get('timeout'),
       observe: Ember.run.bind(this, function(state) {
-        this.set('currentState', state);
+        this.set('currentRequestState', state);
       })
     });
     let headers = this.get('headers') || {};
@@ -32,13 +35,14 @@ export default Ember.Component.extend({
   }),
 
   setInitialState: Ember.observer('request', function() {
-    this.set('currentState', this.get('request.state'));
+    this.set('currentRequestState', this.get('request.state'));
   }),
 
-  model: Ember.computed('currentState', function() {
+  model: Ember.computed('currentRequestState', function() {
     let request = this.get('request');
     let config = this.getProperties('method', 'url');
-    return Object.create(this.get('currentState'), {
+    let state = this.get('currentRequestState') || this.get('request.state');
+    return Object.create(state, {
       send: {
         value: function(data) {
           request.open(config.method, config.url);
