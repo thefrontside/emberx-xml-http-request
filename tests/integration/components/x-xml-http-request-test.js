@@ -43,5 +43,8 @@ describeComponent(
         responseType: "json"
       });
     });
+    it("sets the headers of the request object", function() {
+      expect(this.stub.headers.one).to.equal('two');
+    });
   }
 );
