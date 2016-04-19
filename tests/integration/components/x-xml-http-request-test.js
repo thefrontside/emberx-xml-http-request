@@ -25,9 +25,10 @@ describeComponent(
       };
 
       this.set('XRequestStub', XRequestStub);
+      this.set('headers', {one: "two"});
       this.set('method', 'POST');
       this.render(hbs`
-{{#x-xml-http-request headers=(hash one="two") response-type="json" method="POST" url="http://google.com" with-credentials=true timeout=1200 request-constructor=XRequestStub as |xhr|}}
+{{#x-xml-http-request headers=headers response-type="json" method="POST" url="http://google.com" with-credentials=true timeout=1200 request-constructor=XRequestStub as |xhr|}}
   <button {{action xhr.send}}>Send</button>
   <button {{action xhr.abort}}>Abort</button>
 {{/x-xml-http-request}}`);
