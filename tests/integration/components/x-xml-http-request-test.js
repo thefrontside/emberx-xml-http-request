@@ -31,7 +31,7 @@ describeComponent(
       this.set('data', {hello: 'I am data'});
       this.render(hbs`
 {{#x-xml-http-request headers=headers response-type="json" method="POST" url="http://google.com" with-credentials=true timeout=1200 request-constructor=XRequestStub as |xhr|}}
-  <div class="spec-status {{isLoadStarted}}">Status</div>
+  <div class="spec-status {{if xhr.isLoadStarted 'load-started'}}">Status</div>
   <button class="spec-send" {{action (action xhr.send data)}}>Send</button>
   <button class="spec-abort" {{action xhr.abort}}>Abort</button>
 {{/x-xml-http-request}}`);
@@ -66,6 +66,17 @@ describeComponent(
 
       it("calls the abort method on the underlying request object", function() {
         expect(this.stub.abort.called).to.equal(true);
+      });
+    });
+
+    describe("emitting a new state", function() {
+      beforeEach(function() {
+        this.stub.options.observe({
+          isLoadStarted: true
+        });
+      });
+      it("is reflected in the scope of the component", function() {
+        expect(this.$('.spec-status').hasClass('load-started')).to.equal(true);
       });
     });
   }
