@@ -1,7 +1,8 @@
 /* jshint expr:true */
 import { expect } from 'chai';
 import { describeComponent } from 'ember-mocha';
-import {  beforeEach, it } from 'mocha';
+import { describe, beforeEach, it } from 'mocha';
+import sinon from 'sinon';
 import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
@@ -17,22 +18,23 @@ describeComponent(
       function XRequestStub(options) {
         test.stub = this;
         this.options = options;
+        this.setRequestHeader = sinon.spy();
+        this.send = sinon.spy();
+        this.open = sinon.spy();
+        this.abort = sinon.spy();
         this.state = {};
-        this.headers = {};
       }
-      XRequestStub.prototype.setRequestHeader = function setRequestHeader(key, value) {
-        this.headers[key] = value;
-      };
 
       this.set('XRequestStub', XRequestStub);
       this.set('headers', {one: "two"});
       this.set('method', 'POST');
+      this.set('data', {hello: 'I am data'});
       this.render(hbs`
 {{#x-xml-http-request headers=headers response-type="json" method="POST" url="http://google.com" with-credentials=true timeout=1200 request-constructor=XRequestStub as |xhr|}}
-  <button {{action xhr.send}}>Send</button>
-  <button {{action xhr.abort}}>Abort</button>
+  <div class="spec-status {{isLoadStarted}}">Status</div>
+  <button class="spec-send" {{action (action xhr.send data)}}>Send</button>
+  <button class="spec-abort" {{action xhr.abort}}>Abort</button>
 {{/x-xml-http-request}}`);
-
     });
 
     it('invokes the x-request constructor', function() {
@@ -44,7 +46,27 @@ describeComponent(
       });
     });
     it("sets the headers of the request object", function() {
-      expect(this.stub.headers.one).to.equal('two');
+      expect(this.stub.setRequestHeader.calledWith('one', 'two')).to.equal(true);
+    });
+
+    describe("invoking the send() action", function() {
+      beforeEach(function() {
+        this.$('.spec-send').click();
+      });
+      it("call the open method with the configured http verb and url, and then calls the send method", function() {
+        expect(this.stub.open.calledWith('POST', "http://google.com")).to.equal(true);
+        expect(this.stub.send.calledWith({hello: 'I am data'})).to.equal(true);
+      });
+    });
+
+    describe("invoking the abort action", function() {
+      beforeEach(function() {
+        this.$('.spec-abort').click();
+      });
+
+      it("calls the abort method on the underlying request object", function() {
+        expect(this.stub.abort.called).to.equal(true);
+      });
     });
   }
 );
