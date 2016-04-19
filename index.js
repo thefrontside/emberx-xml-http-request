@@ -9,10 +9,6 @@ var path = require('path');
 module.exports = {
   name: 'emberx-xml-http-request',
 
-  isDevelopingAddon: function() {
-    return true;
-  },
-
   /**
    * The addon tree is augmented with the x-request modules. This
    * makes them available not only to `ember-x-request` as a whole,
