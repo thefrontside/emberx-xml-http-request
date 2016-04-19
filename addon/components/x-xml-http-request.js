@@ -15,7 +15,9 @@ export default Ember.Component.extend({
 
   'request-constructor': XRequest,
 
-  request: Ember.computed('method', 'response-type', 'with-credentials', 'url', 'headers', 'timeout', function() {
+  'resetCount': 0,
+
+  request: Ember.computed('method', 'response-type', 'with-credentials', 'url', 'headers', 'timeout', 'resetCount', function() {
     let Request = this.get('request-constructor');
 
     let request = new Request({
@@ -42,6 +44,7 @@ export default Ember.Component.extend({
     let request = this.get('request');
     let config = this.getProperties('method', 'url');
     let state = this.get('currentRequestState') || this.get('request.state');
+    let component = this;
     return Object.create(state, {
       send: {
         value: function(data) {
@@ -52,6 +55,11 @@ export default Ember.Component.extend({
       abort: {
         value:  function() {
           request.abort();
+        }
+      },
+      reset: {
+        value: function() {
+          component.incrementProperty('resetCount');
         }
       }
     });

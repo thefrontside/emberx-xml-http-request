@@ -34,6 +34,7 @@ describeComponent(
   <div class="spec-status {{if xhr.isLoadStarted 'load-started'}}">Status</div>
   <button class="spec-send" {{action (action xhr.send data)}}>Send</button>
   <button class="spec-abort" {{action xhr.abort}}>Abort</button>
+  <button class="spec-reset" {{action xhr.reset}}>Reset</button>
 {{/x-xml-http-request}}`);
     });
 
@@ -79,5 +80,16 @@ describeComponent(
         expect(this.$('.spec-status').hasClass('load-started')).to.equal(true);
       });
     });
+
+    describe("resetting the request", function() {
+      beforeEach(function() {
+        this.previousStub = this.stub;
+        this.$('.spec-reset').click();
+      });
+      it("generates a brand new request", function() {
+        expect(this.stub).not.to.equal(this.previousStub);
+      });
+    });
+
   }
 );
