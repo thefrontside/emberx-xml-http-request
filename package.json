@@ -48,7 +48,7 @@
     "broccoli-merge-trees": "^1.1.1",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.5",
-    "x-request": "^0.2.1"
+    "x-request": "^0.2.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
