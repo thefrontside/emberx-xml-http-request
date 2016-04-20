@@ -3,11 +3,13 @@
 {{/x-file-input}}
 
 {{#each files as |file|}}
-  {{#x-xml-http-request method="POST" data=file url="http://posttestserver.com/post.php" as |xhr|}}
+  {{#x-xml-http-request method="POST" url="http://posttestserver.com/post.php" as |xhr|}}
     name: {{file.name}}<br/>
     isLoadStarted: {{xhr.isLoadStarted}}<br/>
     isLoadEnded: {{xhr.isLoadEnded}}<br/>
     bytes: {{xhr.upload.loaded}}/{{xhr.upload.total}}<br/>
     percent complete: {{xhr.upload.percentage}}%
+    <button {{action (action xhr.send file)}}>Send</button>
+    <button {{action (action xhr.abort)}}>Abort</button>
   {{/x-xml-http-request}}
 {{/each}}
