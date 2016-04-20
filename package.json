@@ -11,7 +11,11 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/thefrontside/emberx-xml-http-request",
+  "homepage": "https://github.com/thefrontside/emberx-xml-http-request",
+  "bugs": {
+    "url": "https://github.com/thefrontside/emberx-xml-http-request/issues"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -41,7 +45,7 @@
     "loader.js": "^4.0.1"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon", "xhr", "network", "immutable"
   ],
   "dependencies": {
     "broccoli-babel-transpiler": "^5.5.0",
