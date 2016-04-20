@@ -1,6 +1,6 @@
 {
   "name": "emberx-xml-http-request",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Beautiful, transparent uploads and downloads optimized for templating",
   "directories": {
     "doc": "doc",
