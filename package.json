@@ -35,6 +35,7 @@
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
+    "ember-sinon": "0.5.0",
     "ember-try": "^0.2.2",
     "emberx-file-input": "1.0.0",
     "loader.js": "^4.0.1"
@@ -48,7 +49,7 @@
     "broccoli-merge-trees": "^1.1.1",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.5",
-    "x-request": "^0.2.1"
+    "x-request": "^0.2.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
