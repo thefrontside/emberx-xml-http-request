@@ -8,7 +8,7 @@ It allows you to declaratively make xml http requests in your
 templates by injecting an object modelling the request into your templates.
 
 ```handlebars
-{{x-xml-http-request method="PUT" timeout=12000 url=http://fileupload.com as |xhr|}}
+{{x-xml-http-request method="PUT" timeout=12000 url="http://fileupload.com" as |xhr|}}
   name: {{file.name}}<br/>
   bytes uploaded: {{xhr.upload.loaded}} <br/>
   bytes total: {{xhr.upload.total}} <br/>
