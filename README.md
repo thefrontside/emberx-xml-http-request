@@ -1,7 +1,9 @@
 # emberx-xml-http-request
 
 [![npm version](https://badge.fury.io/js/emberx-xml-http-request.svg)](https://badge.fury.io/js/emberx-xml-http-request)
+[![Ember Observer Score](https://emberobserver.com/badges/emberx-xml-http-request.svg)](https://emberobserver.com/addons/emberx-xml-http-request)
 [![Build Status](https://travis-ci.org/thefrontside/emberx-xml-http-request.svg?branch=master)](https://travis-ci.org/thefrontside/emberx-xml-http-request)
+
 
 Easily achieve beautiful, transparent uploads and downloads with a reactive XmlHttpRequest
 
