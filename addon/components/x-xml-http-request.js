@@ -197,5 +197,6 @@ export default Ember.Component.extend({
   didInsertElement(...args) {
     this._super(...args);
     this.setInitialState();
+    this.sendAction('on-init', this.get('model'));
   }
 });

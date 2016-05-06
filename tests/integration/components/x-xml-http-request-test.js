@@ -7,7 +7,7 @@ import hbs from 'htmlbars-inline-precompile';
 
 describeComponent(
   'x-xml-http-request',
-  'Integration: XXmlHttpRequestComponent',
+  'Integration: XmlHttpRequestComponent',
   {
     integration: true
   },
@@ -29,13 +29,19 @@ describeComponent(
       this.set('headers', {one: "two"});
       this.set('method', 'POST');
       this.set('data', {hello: 'I am data'});
+      this.set('onInit', sinon.spy());
       this.render(hbs`
-{{#x-xml-http-request headers=headers response-type="json" method="POST" url="http://google.com" with-credentials=true timeout=1200 request-constructor=XRequestStub as |xhr|}}
+{{#x-xml-http-request headers=headers on-init=onInit response-type="json" method="POST" url="http://google.com" with-credentials=true timeout=1200 request-constructor=XRequestStub as |xhr|}}
   <div class="spec-status {{if xhr.isLoadStarted 'load-started'}}">Status</div>
   <button class="spec-send" {{action (action xhr.send data)}}>Send</button>
   <button class="spec-abort" {{action xhr.abort}}>Abort</button>
   <button class="spec-reset" {{action xhr.reset}}>Reset</button>
 {{/x-xml-http-request}}`);
+    });
+
+    it("invokes the on-init action", function() {
+      expect(this.get('onInit').called).to.equal(true);
+      expect(this.get('onInit').firstCall).to.have.deep.property("args[0].send");
     });
 
     it('invokes the x-request constructor', function() {
