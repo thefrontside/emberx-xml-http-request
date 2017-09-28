@@ -1,10 +1,9 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
-var BabelTranspiler = require('broccoli-babel-transpiler');
-var Funnel = require('broccoli-funnel');
-var MergeTrees = require('broccoli-merge-trees');
 var path = require('path');
+var mergeTrees = require('broccoli-merge-trees');
+var Funnel = require('broccoli-funnel');
 
 module.exports = {
   name: 'emberx-xml-http-request',
@@ -21,25 +20,19 @@ module.exports = {
     // get the base addon tree
     var addonTree = this._super.treeForAddon.apply(this, arguments);
 
-
-    // transpile the x-request sources into ES5. However, we want
-    // to leave the ES6 module declaration in place because they'll be
-    // handled later by ember-cli.
-
+    // take the x-request sources and put them into
+    // `x-request/{*}.js` so that ember-cli-babel will
+    // properly name them
     var src = path.join(require.resolve('x-request'), '../../src');
-
-    var transpiled = new BabelTranspiler(src, {
-      loose: true,
-      blacklist: ['es6.modules']
+    var xRequest = new Funnel(src, {
+      destDir: 'x-request'
     });
 
-    // take the transpiled x-request sources and put them into
-    // `modules/x-request/{*}.js` so that the
-    // ember-cli build will pick them up.
-    var xRequest = new Funnel(transpiled, {
-      destDir: 'modules/x-request'
-    });
+    // transpile the x-request sources into whatever the consuming app wants
+    var babelAddon = this.addons.find(addon => addon.name === 'ember-cli-babel');
+    var transpiled = babelAddon.transpileTree(xRequest);
 
-    return new MergeTrees([addonTree, xRequest]);
+    // add the transpiled sources to the add-on output
+    return mergeTrees([addonTree, transpiled]);
   }
 };
