@@ -2,61 +2,57 @@
   "name": "emberx-xml-http-request",
   "version": "0.2.3",
   "description": "Beautiful, transparent uploads and downloads optimized for templating",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
-  "scripts": {
-    "build": "ember build",
-    "start": "ember server",
-    "test": "ember try:testall"
-  },
-  "repository": "https://github.com/thefrontside/emberx-xml-http-request",
-  "homepage": "https://github.com/thefrontside/emberx-xml-http-request",
-  "bugs": {
-    "url": "https://github.com/thefrontside/emberx-xml-http-request/issues"
-  },
-  "engines": {
-    "node": ">= 0.10.0"
-  },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "broccoli-asset-rev": "^2.4.2",
-    "ember-ajax": "0.7.1",
-    "ember-cli": "2.5.0",
-    "ember-cli-app-version": "^1.0.0",
-    "ember-cli-dependency-checker": "^1.2.0",
-    "ember-cli-htmlbars-inline-precompile": "^0.3.1",
-    "ember-cli-inject-live-reload": "^1.4.0",
-    "ember-cli-jshint": "^1.0.0",
-    "ember-cli-mocha": "0.10.2",
-    "ember-cli-release": "0.2.8",
-    "ember-cli-sri": "^2.1.0",
-    "ember-cli-uglify": "^1.2.0",
-    "ember-data": "^2.5.0",
-    "ember-disable-prototype-extensions": "^1.1.0",
-    "ember-export-application-global": "^1.0.5",
-    "ember-load-initializers": "^0.5.1",
-    "ember-resolver": "^2.0.3",
-    "ember-sinon": "0.5.0",
-    "ember-try": "^0.2.2",
-    "emberx-file-input": "1.0.0",
-    "loader.js": "^4.0.1"
-  },
   "keywords": [
     "ember-addon",
     "xhr",
     "network",
     "immutable"
   ],
+  "license": "MIT",
+  "author": "",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "repository": "https://github.com/thefrontside/emberx-xml-http-request",
+  "homepage": "https://github.com/thefrontside/emberx-xml-http-request",
+  "bugs": {
+    "url": "https://github.com/thefrontside/emberx-xml-http-request/issues"
+  },
+  "scripts": {
+    "build": "ember build",
+    "start": "ember server",
+    "test": "ember try:each"
+  },
   "dependencies": {
-    "broccoli-babel-transpiler": "^5.5.0",
-    "broccoli-funnel": "^1.0.1",
-    "broccoli-merge-trees": "^1.1.1",
-    "ember-cli-babel": "^5.1.6",
-    "ember-cli-htmlbars": "^1.0.5",
+    "ember-cli-babel": "^6.3.0",
+    "ember-cli-htmlbars": "^2.0.1",
     "x-request": "^0.2.2"
+  },
+  "devDependencies": {
+    "broccoli-asset-rev": "^2.4.5",
+    "ember-ajax": "^3.0.0",
+    "ember-cli": "~2.15.1",
+    "ember-cli-chai": "^0.4.0",
+    "ember-cli-dependency-checker": "^2.0.0",
+    "ember-cli-eslint": "^4.0.0",
+    "ember-cli-htmlbars-inline-precompile": "^1.0.0",
+    "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-mocha": "^0.14.4",
+    "ember-cli-shims": "^1.1.0",
+    "ember-cli-sri": "^2.1.0",
+    "ember-cli-uglify": "^1.2.0",
+    "ember-disable-prototype-extensions": "^1.1.2",
+    "ember-export-application-global": "^2.0.0",
+    "ember-load-initializers": "^1.0.0",
+    "ember-resolver": "^4.0.0",
+    "ember-sinon": "^1.0.1",
+    "ember-source": "~2.15.0",
+    "emberx-file-input": "^1.1.2",
+    "loader.js": "^4.2.3"
+  },
+  "engines": {
+    "node": "^4.5 || 6.* || >= 7.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
