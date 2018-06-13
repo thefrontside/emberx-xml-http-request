@@ -129,6 +129,9 @@ ember install emberx-xml-http-request
 [1]: https://github.com/cowboyd/x-request.js
 [2]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#send()
 
+## Applications Installed
+[Weekly Digest](github.com/apps/weekly-digest)
+
 ## Code of Conduct
 Please note that this project is released with a Contributor Code of
 Conduct. By participating in this project you agree to abide by its
